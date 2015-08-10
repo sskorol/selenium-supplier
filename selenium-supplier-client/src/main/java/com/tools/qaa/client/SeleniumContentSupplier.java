@@ -53,16 +53,16 @@ public class SeleniumContentSupplier {
     }
 
     public String downloadFile(final SeleniumContent contentType, final String localFolder) {
-        final String[] paths = getLatestPath(contentType.getContent())
+        final String[] latestPath = getLatestPath(contentType.getContent())
                 .map(path -> path.split("/"))
                 .orElse(new String[0]);
 
-        if (paths.length < 2) {
-            throw new IllegalArgumentException("Unable to parse provided end-point path: " + Arrays.asList(paths));
+        if (latestPath.length < 2) {
+            throw new IllegalArgumentException("Unable to parse provided end-point path: " + Arrays.asList(latestPath));
         }
 
-        final String version = paths[0];
-        final String fileName = paths[1];
+        final String version = latestPath[0];
+        final String fileName = latestPath[1];
         String prettifiedFileName = separatorsToSystem(Optional.ofNullable(localFolder)
                 .orElse(System.getProperty("user.home")) + File.separator + fileName);
 
@@ -139,18 +139,5 @@ public class SeleniumContentSupplier {
                 .map(ContentsType::getKey)
                 .filter(key -> key.contains(contentType.getName()))
                 .reduce((key1, key2) -> key2);
-    }
-
-    public static void main(String[] args) throws IOException {
-        final String outputPath = "C:\\Drivers";
-        final SeleniumContentSupplier supplier = new SeleniumContentSupplier("10.70.20.115", 4043);
-
-        Arrays.asList(SeleniumContent.SELENIUM_SERVER, SeleniumContent.CHROME_DRIVER_WIN32, SeleniumContent.IE_DRIVER_X32)
-                .stream()
-                .parallel()
-                .forEach(content -> supplier.sendFileToRemoteAndUnZip(Collections.singletonList(
-                        supplier.downloadAndUnZipFile(content, outputPath)), outputPath));
-
-        supplier.closeConnection();
     }
 }
