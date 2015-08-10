@@ -1,4 +1,4 @@
-Selenium content supplier.
+Selenium content supplier
 ======
 
 This small library provides useful API for downloading latest Selenium standalone servers and drivers.
