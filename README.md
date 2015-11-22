@@ -10,4 +10,4 @@ http://qa-automation-notes.blogspot.com/2015/08/selenium-content-supplier.html
 You can find some samples in the related repository: 
 https://github.com/sskuts/selenium-supplier-examples
 
-Author: Serhii Kuts (sergey.s.kuts@gmail.com)
+Author: Serhii (Kuts) Korol (serhii.s.korol@gmail.com)
